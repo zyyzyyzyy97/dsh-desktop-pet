@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coo · 设置</title>
+<link rel="stylesheet" href="/web/settings.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="dot"></span><h1>Coo 设置</h1></div>
+  <div class="top-actions">
+    <button id="btnSkills" class="ghost">技能</button>
+    <button id="btnDress" class="ghost">换皮肤</button>
+    <button id="btnPet" class="ghost">网页版鲸鱼</button>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>模型与密钥</h2>
+    <p class="hint">鲸鱼直接用这个接口对话。<b>DeepSeek</b> 填 <code>https://api.deepseek.com</code> + <code>deepseek-chat</code>；任何 OpenAI 兼容服务都行（如 <code>https://api.openai.com/v1</code>）。</p>
+    <div class="field">
+      <label for="baseUrl">接口地址 Base URL</label>
+      <input id="baseUrl" type="text" placeholder="https://api.deepseek.com" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="apiKey">API Key / Token</label>
+      <div class="inline">
+        <input id="apiKey" type="password" placeholder="sk-..." spellcheck="false" autocomplete="off">
+        <button id="btnPeek" class="ghost small" type="button">显示</button>
+      </div>
+      <p class="hint" id="keyState">—</p>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label for="model">模型</label>
+        <input id="model" type="text" placeholder="deepseek-chat" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="temperature">温度 <span id="tv" class="mono">0.85</span></label>
+        <input id="temperature" type="range" min="0" max="1.5" step="0.05">
+      </div>
+    </div>
+    <div class="row">
+      <button id="btnSaveModel" class="primary">保存</button>
+      <button id="btnTest" class="ghost">测试连接</button>
+      <button id="btnReset" class="ghost">清空聊天记忆</button>
+    </div>
+    <p id="modelMsg" class="msg"></p>
+  </section>
+
+  <section class="card">
+    <h2>人设</h2>
+    <div class="grid2">
+      <div class="field">
+        <label for="name">名字</label>
+        <input id="name" type="text" placeholder="Coo">
+      </div>
+      <div class="field">
+        <label for="greeting">开场白</label>
+        <input id="greeting" type="text" placeholder="我在这儿。想聊点什么？">
+      </div>
+    </div>
+    <div class="field">
+      <label for="persona">性格 / 说话方式</label>
+      <textarea id="persona" rows="6" spellcheck="false"></textarea>
+    </div>
+    <div class="row"><button id="btnSavePersona" class="primary">保存人设</button></div>
+    <p id="personaMsg" class="msg"></p>
+  </section>
+
+  <section class="card">
+    <h2>桌宠浮窗</h2>
+    <p class="hint">鲸鱼用 Coopanion 的 Electron 以透明置顶浮窗显示在桌面上（不是浏览器标签）。改完点「重开浮窗」生效。</p>
+    <div class="field">
+      <label for="petHostExe">Coopanion.exe 路径</label>
+      <input id="petHostExe" type="text" spellcheck="false">
+    </div>
+    <label class="check"><input id="autoOpenWindow" type="checkbox"> 随 DSH 启动自动开浮窗</label>
+    <label class="check"><input id="keepAsking" type="checkbox"> 说完一句自动弹回输入框（连续聊天）</label>
+    <div class="row">
+      <button id="btnSavePet" class="primary">保存</button>
+      <button id="btnReopen" class="ghost">重开浮窗</button>
+    </div>
+    <p id="petMsg" class="msg"></p>
+  </section>
+
+  <section class="card" id="voice-memory">
+    <h2>声音 · 表情 · 记忆</h2>
+    <p class="hint">她说话时，气泡照旧出现，声音会稍晚一点跟上。桌面浮窗和 QQ 用的是<b>同一个记忆库</b>，两边说过的话互相记得，重启也不丢。</p>
+    <label class="check"><input id="voiceOut" type="checkbox"> 说话出声（语音 + 文字）</label>
+    <label class="check"><input id="memesOn" type="checkbox"> 会发表情包</label>
+    <label class="check"><input id="memoryOn" type="checkbox"> 记住聊过的事（长期记忆）</label>
+    <div class="field">
+      <label for="ttsVoice">音色</label>
+      <div class="inline">
+        <input id="ttsVoice" type="text" spellcheck="false" placeholder="Cherry / Serena / Ethan">
+        <button id="btnTestVoice" class="ghost" type="button">试听</button>
+      </div>
+    </div>
+    <div class="row">
+      <button id="btnSaveVoice" class="primary">保存</button>
+      <button id="btnMemoryReveal" class="ghost" type="button">看看她记得什么</button>
+    </div>
+    <p id="voiceMsg" class="msg"></p>
+    <pre id="memoryBox" class="mono" style="display:none;max-height:300px;overflow:auto;white-space:pre-wrap;font-size:12px"></pre>
+  </section>
+
+  <section class="card" id="skills">
+    <h2>技能 · Skills（从 GitHub 安装）</h2>
+    <p class="hint">这里装的是给 <b>DSH 主对话</b>用的能力（连 QQ、刷 B 站、语音转文字……），不是鲸鱼的外观。装完在 DSH 里直接说需求，模型会自己挑技能；也可以打 <code>/技能名</code> 手动调。</p>
+    <p class="hint">填 GitHub 仓库地址即可。一个仓库里有多个 <code>SKILL.md</code> 会全部装上；也支持 <code>https://github.com/用户名/仓库/tree/分支</code> 和 <code>…/xxx.zip</code>。</p>
+    <div class="field">
+      <label for="skillUrl">GitHub 地址</label>
+      <div class="inline">
+        <input id="skillUrl" type="text" placeholder="https://github.com/anthropics/skills" spellcheck="false">
+        <button id="btnSkillInstall" class="primary" type="button">安装</button>
+      </div>
+    </div>
+    <p id="skillMsg" class="msg"></p>
+    <div class="skills" id="skills-list"></div>
+    <div class="row" style="margin-top:10px">
+      <button id="btnSkillReveal" class="ghost" type="button">打开技能目录</button>
+      <button id="btnSkillReload" class="ghost" type="button">刷新列表</button>
+    </div>
+    <p class="hint" id="skillDir" style="margin-top:8px"></p>
+  </section>
+
+  <section class="card" id="packs">
+    <h2>外观 · 角色包（从 GitHub 安装）</h2>
+    <p class="hint">这是<b>换皮肤</b>用的角色包，和上面的技能不是一回事。填一个含 <code>figure.json</code> 的 GitHub 仓库地址（或 zip 直链）→ 点安装 → 它会出现在角色列表里，去「换皮肤」选它即可。</p>
+    <div class="field">
+      <label for="packUrl">GitHub 地址</label>
+      <div class="inline">
+        <input id="packUrl" type="text" placeholder="https://github.com/用户名/仓库" spellcheck="false">
+        <button id="btnInstall" class="primary" type="button">安装</button>
+      </div>
+    </div>
+    <p id="packMsg" class="msg"></p>
+    <div class="figures" id="figures"></div>
+    <div class="row" style="margin-top:10px">
+      <button id="btnPickFigure" class="ghost" type="button">去换皮肤里选新角色</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>外观</h2>
+    <p class="hint">配色、帽子、眼镜、围巾等都在装扮页里调，改完鲸鱼立刻变。</p>
+    <div class="row">
+      <button id="btnDress2" class="primary">打开装扮页</button>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/web/settings.js"></script>
+</body>
+</html>
