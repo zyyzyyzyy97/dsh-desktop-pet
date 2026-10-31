@@ -13,7 +13,7 @@
 |---|---|
 | [`dsh-desktop-pet/`](./dsh-desktop-pet/) | **主插件**：鲸鱼桌宠本体 + 心情引擎（inner）+ 长期记忆 + TTS/ASR + QQ 桥 + 换肤/技能 |
 | [`dsh-voice-picker/`](./dsh-voice-picker/) | **伴侣插件**：音色工作台，48 种 qwen3-tts 音色试听 + 一键切换小鲸鱼的声音 |
-| [`docs/`](./docs/) | 心情引擎设计文档（DESIGN）、开发志（CHANGELOG）、内部备忘（PROJECT-ADDENDUM） |
+| [`docs/`](./docs/) | 心情引擎设计文档（DESIGN）、开发志（CHANGELOG）、**从旧版升级指南（UPGRADE，保留记忆）**、内部备忘（PROJECT-ADDENDUM） |
 
 ## 核心特性
 

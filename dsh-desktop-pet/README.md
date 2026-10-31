@@ -102,6 +102,57 @@ robocopy "%cd%" "%USERPROFILE%\.dsh\profiles\desktop\plugins\dsh-desktop-pet" /E
   `deepseek-chat`，key 留空）。没填 key 时鲸鱼会用气泡提醒并自动弹设置窗。
 - 保存即生效（内存热生效 + 落盘 `pet-config.json`）。
 
+> 之前装过基础版、想升级到本版并**保留她的记忆**？看 [../docs/UPGRADE.md](../docs/UPGRADE.md)。
+
+### 配置参考（pet-config.json 全部字段）
+
+代码内默认值见 `vendor/pet-service.ts` 的 `DEFAULTS`；`pet-config.json` 里写了的键会覆盖默认值。
+
+| 键 | 默认 | 说明 |
+|---|---|---|
+| `name` | `"Coo"` | 鲸鱼的名字（气泡/记忆里用） |
+| `baseUrl` | `https://api.deepseek.com` | OpenAI 兼容端点 |
+| `apiKey` | `""` | 模型 key，留空时气泡提醒并弹设置窗 |
+| `model` | `deepseek-chat` | 模型名 |
+| `temperature` | `0.85` | 采样温度 |
+| `maxTokens` | `400` | 单条回复上限 |
+| `persona` | 内置反人设底座 | 系统提示词底座（自述式生长philosophy，见 docs/DESIGN.md） |
+| `petHostExe` | `""` | Coopanion 的 `Coopanion.exe` 路径（透明浮窗用；留空 = 浏览器模式） |
+| `autoOpenWindow` | `true` | 启动后自动开浮窗/浏览器窗口 |
+| `keepAsking` | `true` | 说完一句自动弹回输入框 |
+| `greeting` | `"我在这儿。想聊点什么？"` | 开场白 |
+| `vision` | `true` | 命中"帮我看看屏幕"类意图时自动截屏给模型 |
+| `screenWidth` | `1100` | 截屏宽度（越大越清楚也越贵，1100 宽约 750 token） |
+| `fast` | `true` | 关思考链提速（同图 11.3s → 0.9~2.1s；网关不认自动重试） |
+| `memes` | `true` | 发表情包（用 dsh-meme 插件的库；没装库则无图可发） |
+| `memePack` | `""` | 指定别的表情包库（留空用 dsh-meme 默认库） |
+| `voiceOut` | `true` | 出声：qwen3-tts 主路径，失败回退 edge-tts |
+| `ttsVoice` | `"Cherry"` | qwen 音色（Cherry/Serena/Ethan…）；edge 用 `zh-CN-XiaoxiaoNeural` |
+| `memory` | `true` | 三层长期记忆总开关 |
+| `inner` | `true` | ★ 心情引擎总开关（关掉 = 完全回到没有心情的状态，零残留） |
+| `proactive` | `false` | ★ 主动陪聊（默认关；建议真机用一两周再开，见上文 inner 节） |
+
+### 配置参考（qq-config.json 主要字段）
+
+| 键 | 默认 | 说明 |
+|---|---|---|
+| `enabled` | `false` | QQ 桥总开关（随 DSH 一起起） |
+| `mode` | `"forward"` | `forward` 连 NapCat 的 WS / `reverse` 监听等 NapCat 来连 |
+| `wsUrl` | `ws://127.0.0.1:3001` | NapCat 的 OneBot WS 地址（forward 模式） |
+| `listenPort` / `path` | `18767` / `/onebot/v11/ws` | reverse 模式监听 |
+| `token` | `""` | OneBot access token（两边要一致） |
+| `selfId` | `0` | 机器人 QQ 号（0 = 从 NapCat 上报自动取） |
+| `privateReply` / `groupReply` | `true` | 私聊/群聊是否回复 |
+| `groupAtOnly` | `true` | 群聊只在 @ 或命中 `aliases` 时回 |
+| `aliases` | `["小鲸鱼","Coo","coo"]` | 群里叫这些名字会触发回复 |
+| `allow` | `[]` | 白名单（空 = 不限） |
+| `maxReplyChars` / `cooldownMs` | `300` / `1500` | 回复长度 / 冷却 |
+| `sendVoice` / `voiceOnly` / `sendMeme` | `true` / `false` / `true` | 发语音 / **只发语音**（合成失败才退回发字）/ 发表情包 |
+| `napcat.dir` | `""` | NapCat 安装目录（一键上线按钮要用） |
+| `napcat.qqExe` | `""` | QQ 客户端路径（留空自动找） |
+| `napcat.number` | `0` | 免扫码登录用的 QQ 号 |
+| `napcat.showConsole` | `false` | 是否显示 NapCat 控制台窗口 |
+
 ## 会话事件映射
 
 | DSH 会话事件 | → 鲸鱼动作 | 说明 |

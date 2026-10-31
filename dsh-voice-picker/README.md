@@ -54,6 +54,19 @@ node test\cordis-load.mjs  :: 真实 cordis 加载 + 服务起 + 列表 48 个
 
 两个都需要 Node ≥18；`cordis-load.mjs` 需要装过 DSH（用它自带的 cordis）。
 
+## dev\ 开发工具（可选）
+
+| 脚本 | 用途 |
+|---|---|
+| `dev\run-picker.mjs [端口]` | 不经 DSH 直接把工作台拉起来（连运行中的小鲸鱼，只读它的配置），Ctrl+C 退出 |
+| `dev\test-api.mjs [音色] [文本]` | 验证 qwen3-tts API 调用链（与主插件同款逻辑），音频只写 %TEMP% |
+| `dev\qa-check.mjs` / `dev\patrol-preview.mjs` | 音色清单 QA 与预览巡检 |
+| `dev\check-voices-vs-official.mjs` | 对照官方音色列表核对 `data/voices.json` |
+| `dev\test-disk-cache.mjs` | 音频磁盘缓存行为验证 |
+| `dev\test-install.ps1` | 安装形态冒烟（PowerShell） |
+
+全部只读运行中的 pet 配置、不写任何已有文件。
+
 ## 许可
 
 MIT（本插件自有代码）。注意试听与切换依赖主插件的 TTS 链路（qwen3-tts 主路径 + edge-tts 兜底）。
