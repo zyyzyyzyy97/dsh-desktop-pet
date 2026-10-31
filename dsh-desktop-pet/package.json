@@ -1,0 +1,46 @@
+{
+  "name": "dsh-desktop-pet",
+  "version": "0.2.0",
+  "description": "DSH 桌宠插件：原样复用 Coopanion 鲸鱼（会话事件驱动）+ 独立聊天/长期记忆/视觉/TTS/ASR/QQ 桥 + 心情与人格成长引擎（inner）",
+  "type": "module",
+  "main": "src/index.js",
+  "license": "AGPL-3.0",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "desktop-pet",
+    "cordis",
+    "desktop-pet-plugin"
+  ],
+  "dependencies": {
+    "ws": "^8.21.0",
+    "tsx": "^4.19.0",
+    "fflate": "^0.8.2",
+    "jpeg-js": "^0.4.4",
+    "opencc-js": "^1.4.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "3.18.5"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "^3.18.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

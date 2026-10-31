@@ -1,0 +1,30 @@
+{
+  "enabled": false,
+  "mode": "forward",
+  "wsUrl": "ws://127.0.0.1:3001",
+  "listenPort": 18767,
+  "path": "/onebot/v11/ws",
+  "token": "",
+  "petApi": "http://127.0.0.1:18765",
+  "selfId": 0,
+  "privateReply": true,
+  "groupReply": true,
+  "groupAtOnly": true,
+  "aliases": [
+    "小鲸鱼",
+    "Coo",
+    "coo"
+  ],
+  "allow": [],
+  "maxReplyChars": 300,
+  "cooldownMs": 1500,
+  "sendVoice": true,
+  "voiceOnly": false,
+  "sendMeme": true,
+  "napcat": {
+    "dir": "",
+    "qqExe": "",
+    "number": 0,
+    "showConsole": false
+  }
+}

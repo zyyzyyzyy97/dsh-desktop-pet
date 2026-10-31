@@ -1,0 +1,27 @@
+{
+  "figure": "whale",
+  "scheme": "deepseek-cape",
+  "palette": "mint",
+  "head": "none",
+  "side": "none",
+  "glasses": "none",
+  "neck": "none",
+  "colors": {
+    "head": {
+      "main": "body",
+      "acc": "eye"
+    },
+    "side": {
+      "main": "eye",
+      "acc": "eye"
+    },
+    "glasses": {
+      "main": "body",
+      "acc": "eye"
+    },
+    "neck": {
+      "main": "eye",
+      "acc": "eye"
+    }
+  }
+}

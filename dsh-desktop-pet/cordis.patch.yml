@@ -1,0 +1,15 @@
+# dsh-desktop-pet bundle patch: applied as ONE insert over the profile root when this
+# bundle is activated. 必须用裸包名 `name: dsh-desktop-pet`（经 node_modules 结点解析到
+# 本包 main: src/index.js）。切勿写 `name: .`，Loader 会把 . 解析成 profile 根目录并
+# 报 ERR_UNSUPPORTED_DIR_IMPORT 后静默丢弃该 entry。
+#
+# coopanionTsx 不用配：src/index.js 会自动找 tsx（插件 npm 依赖自带 → 已装 Coopanion 的 tsx）。
+# 两个都找不到时 plugin.log 会给出提示；想手动指定就在 config 里加一行：
+#   coopanionTsx: "你的 tsx/dist/cli.mjs 绝对路径"
+- insert:
+  - id: desktop-pet
+    name: dsh-desktop-pet
+    config:
+      petPort: 18765
+      ctrlPort: 18766
+      autoOpen: true
