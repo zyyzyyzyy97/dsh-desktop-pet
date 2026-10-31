@@ -1,0 +1,21 @@
+# 根目录 npm install 的依赖不入库
+/node_modules/
+# 插件自身的 npm 依赖也不入库（用户 npm install 即得；vendor/node_modules 除外，见下）
+dsh-desktop-pet/node_modules/
+
+# 运行时数据与隐私：记忆库、心情状态、日志、锁文件，绝不上传
+runtime-data/
+*.log
+qq-bridge.lock
+*.test-backup
+inner-log.jsonl
+memes.json
+
+# 本机杂物
+NVIDIA Corporation/
+__pycache__/
+Thumbs.db
+.DS_Store
+
+# 注意：dsh-desktop-pet/vendor/node_modules/ 是必须入库的 vendored 依赖
+#（cortico 为打过补丁的副本，见 NOTICE.md），上面的 /node_modules/ 只锚定仓库根，不影响它。
