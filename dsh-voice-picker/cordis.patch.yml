@@ -1,0 +1,9 @@
+# dsh-voice-picker bundle patch: applied as ONE insert over the profile root when this
+# bundle is activated. 必须用裸包名 `name: dsh-voice-picker`（经 node_modules junction
+# 解析到本包 main: src/index.js）。切勿写 `name: .`（Loader 会把 . 解析成 profile 根目录）。
+- insert:
+  - id: voice-picker
+    name: dsh-voice-picker
+    config:
+      port: 18768
+      autoOpen: false

@@ -1,0 +1,23 @@
+{
+  "name": "dsh-voice-picker",
+  "version": "0.1.0",
+  "description": "DSH 桌宠音色工作台：48 种 qwen3-tts 音色试听 + 一键切换（经 pet 的 /api/config 热生效，无需重启）",
+  "type": "module",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "tts",
+    "voice",
+    "cordis"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
